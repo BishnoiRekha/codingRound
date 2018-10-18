@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Driver {
     public static WebDriver driver;
-    public static WebDriver getDriver()
+    public final static WebDriver getDriver()
     {
         setDriverPath();
         driver = new ChromeDriver(setChromeProperties());

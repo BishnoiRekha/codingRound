@@ -2,6 +2,7 @@ package Pages;
 
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,6 +29,7 @@ public class Wrapper {
     {
         elem.sendKeys(text);
     }
+
     public void enterValue(WebElement elem,String text,Boolean clearBeforeEnter)
     {
         if (clearBeforeEnter)
@@ -39,7 +41,10 @@ public class Wrapper {
         elem.clear();
     }
 
-
+    public WebElement findElementByXpath(String xpath)
+    {
+        return driver.findElement(By.xpath(xpath));
+    }
     public void waitFor(int durationInMilliSeconds) {
         try {
             Thread.sleep(durationInMilliSeconds);
@@ -95,6 +100,18 @@ public class Wrapper {
     public void switchToIFrame(WebElement elem) {
        driver.switchTo().frame(elem);
     }
+
+    public void dragAndDropBy(WebElement source,int xOffSet,int yOffSet)
+    {
+        Actions act=new Actions(driver);
+        act.dragAndDropBy(source,xOffSet,yOffSet).build().perform();
+    }
+    public void dragAndDrop(WebElement source,WebElement destination)
+    {
+        Actions act=new Actions(driver);
+        act.dragAndDrop(source,destination).build().perform();
+    }
+
 }
 
 

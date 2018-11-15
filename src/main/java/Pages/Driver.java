@@ -4,6 +4,7 @@ import com.sun.javafx.PlatformUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -17,7 +18,9 @@ public class Driver {
     {
         setDriverPath();
         driver = new ChromeDriver(setChromeProperties());
+//        driver=new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.manage().window().maximize();
         return driver;
     }
     public static ChromeOptions setChromeProperties() {
@@ -39,6 +42,7 @@ public class Driver {
         }
         if (PlatformUtil.isWindows()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver_2.exe");
+//            System.setProperty("webdriver.gecko.driver", "C:\\Users\\bishn\\Documents\\geckodriver-v0.23.0-win32\\geckodriver.exe");
         }
         if (PlatformUtil.isLinux()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");

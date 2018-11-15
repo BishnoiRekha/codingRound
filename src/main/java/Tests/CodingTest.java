@@ -1,53 +1,37 @@
 package Tests;
-import Pages.Driver;
-import Pages.FlightBookingPage;
-import Pages.HotelBookingPage;
-import Pages.SignInPage;
+import Pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 
 public class CodingTest {
-
-
-    @Test
-    public void testThatResultsAppearForAOneWayJourney() {
+    
+    @Test()
+    public void createAppTest() {
         WebDriver driver=Driver.getDriver();
-        FlightBookingPage flightBookingPage=PageFactory.initElements(driver,FlightBookingPage.class);
-        flightBookingPage.loadPage("https://www.cleartrip.com");
-        flightBookingPage.click_OneWay();
-        flightBookingPage.enter_source("Bangalore");
-        flightBookingPage.enter_destination("Delhi");
-        flightBookingPage.click_date();
-        flightBookingPage.click_search();
-        flightBookingPage.validate_isDisplayedSearchResults();
-        flightBookingPage.closeBrowser();
+        HomePage homePage=PageFactory.initElements(driver, HomePage.class);
+        homePage.loadPage("http://quickfuseapps.com");
+        homePage.click_createApp();
+        homePage.click_letsGetStarted();
+        CreateAppPage createAppPage=PageFactory.initElements(driver, CreateAppPage.class);
+        createAppPage.click_newApp();
+        createAppPage.enter_appName("myApp");
+        createAppPage.click_messaging();
+        createAppPage.click_sendSms();
+        createAppPage.enter_phone("9876543210");
+        createAppPage.enter_text("Test");
+        createAppPage.join_startToSMS();
+        createAppPage.click_sendEmail();
+        createAppPage.join_smsToEmail();
+        createAppPage.click_basic();
+        createAppPage.click_exitNode(400,100);
+        createAppPage.join_smsToExit();
+        createAppPage.click_exitNode(400,400);
+        createAppPage.join_EmailToExit("west",5);
+        createAppPage.click_exitNode(1150,400);
+        createAppPage.join_EmailToExit("east",6);
     }
 
-    @Test
-    public void shouldBeAbleToSearchForHotels() {
-        WebDriver driver=Driver.getDriver();
-        HotelBookingPage hotelBookingPage=PageFactory.initElements(driver,HotelBookingPage.class);
-        hotelBookingPage.loadPage("https://www.cleartrip.com");
-        hotelBookingPage.click_hotelLink();
-        hotelBookingPage.enter_locality("Indiranagar, Bangalore");
-        hotelBookingPage.select_travellers("1 room, 2 adults");
-        hotelBookingPage.search_hotel();
-        hotelBookingPage.validate_hotelResults();
-        hotelBookingPage.closeBrowser();
-    }
-
-    @Test(groups = "SignIn")
-    public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
-        WebDriver driver=Driver.getDriver();
-        SignInPage signInPage=PageFactory.initElements(driver,SignInPage.class);
-        signInPage.loadPage("https://www.cleartrip.com");
-        signInPage.click_yourTrips();
-        signInPage.click_signInLink();
-        signInPage.click_signInButton();
-        signInPage.validate_errorText();
-
-    }
 
 }
